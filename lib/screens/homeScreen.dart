@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:newflut_app/models/category.dart';
+import 'package:newflut_app/services/services.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -11,25 +13,51 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Account'
-    ),
-    Text(
-        'Index 1: Home'
-    ),
-    Text(
-        'Index 2: Cart'
-    ),
-  ];
+  //Future<List> futureCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  int _selectedIndex = 0; // Index denotes the select menu in bottom nav bar
+
+  void _getData() async {
+    List _categoriesData = await fetchCategories();
+    print(_categoriesData);
+  }
 
   void _onItemTapped(int index) {
+    // Function to detect tap on bottom navigation bar
     setState(
         () {
           _selectedIndex = index;
         }
     );
+  }
+
+  Widget _drawContainers([String shape]) {
+    // This function draws containers for the home page
+    if (shape == 'circle') {
+      // circle container are for the categories
+      return Container(
+        width: 80.0,
+        height: 80.0,
+        margin: EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.blueGrey,
+        ),
+      );
+    } else {
+      return Container(
+        color: Colors.blueGrey,
+        width: 80.0,
+        height: 80.0,
+        margin: EdgeInsets.all(20.0),
+      );
+    }
   }
 
   final List<String> imgList = [
@@ -167,66 +195,16 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    Container(
-                      color: Colors.deepOrange,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.pink,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.lightGreenAccent,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.greenAccent,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.amber,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.blueAccent,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.cyanAccent,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.deepPurple,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.yellow,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
-                    Container(
-                      color: Colors.blueGrey,
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                    ),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
+                    _drawContainers(),
                   ],
                 ),
               ),
@@ -244,96 +222,16 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.yellow,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.cyan,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.pink,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 80.0,
-                      height: 80.0,
-                      margin: EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        color: Colors.indigo,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
+                    _drawContainers('circle'),
                   ],
                 ),
               ),

@@ -19,7 +19,6 @@ Row addRadioButton(int btnValue, String title) {
 }
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({Key key}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
