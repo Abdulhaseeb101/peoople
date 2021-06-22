@@ -13,20 +13,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  //Future<List> futureCategory;
+  Future<Category> futureCategory;  // Variable to fetch categories
 
   @override
   void initState() {
     super.initState();
-    _getData();
+    futureCategory = fetchCategories();
   }
 
   int _selectedIndex = 0; // Index denotes the select menu in bottom nav bar
-
-  void _getData() async {
-    List _categoriesData = await fetchCategories();
-    print(_categoriesData);
-  }
 
   void _onItemTapped(int index) {
     // Function to detect tap on bottom navigation bar
@@ -193,20 +188,23 @@ class _HomeState extends State<Home> {
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                    _drawContainers(),
-                  ],
-                ),
+                child: FutureBuilder<Category>(
+                  future: futureCategory,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      // If snapshot contains valid data
+                      // display it
+                      return Text(snapshot.data.label);
+                    } else if (snapshot.hasError) {
+                      // If it has errors
+                      // display error
+                      return Text("${snapshot.error}");
+                    }
+
+                    return CircularProgressIndicator(); //By default, show a loading spinner
+                  },
+
+                )
               ),
               Divider(
                 color: Colors.grey,

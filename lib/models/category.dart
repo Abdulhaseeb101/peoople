@@ -1,7 +1,17 @@
 class Category {
-  final String name;
+  final String label;
+  final String value;
 
   Category({
-    this.name
-});
+    this.label,
+    this.value,
+
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      label: json['label'] as String,
+      value: json['value'] as String,
+    );
+  }
 }
