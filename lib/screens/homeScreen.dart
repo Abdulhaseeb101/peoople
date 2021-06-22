@@ -19,6 +19,12 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     futureCategory = fetchCategories();
+
+    if (categoriesLength == null) {
+      // Exception handling for when
+      // might turn out to be null
+      throw Exception('Categories Length returned as null');
+    }
   }
 
   int _selectedIndex = 0; // Index denotes the select menu in bottom nav bar
@@ -32,9 +38,18 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _drawContainers([String shape]) {
+  List<Widget> _drawContainers(int _count,[String _shape]) {
+    List<Widget> _containers = [];
+    print(_containers);
+    for (int i = 0; i < _count; i++) {
+      _containers.add(_drawContainer(_shape));
+    }
+
+    return _containers;
+  }
+  Widget _drawContainer([String _shape]) {
     // This function draws containers for the home page
-    if (shape == 'circle') {
+    if (_shape == 'circle') {
       // circle container are for the categories
       return Container(
         width: 80.0,
@@ -188,23 +203,9 @@ class _HomeState extends State<Home> {
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: FutureBuilder<Category>(
-                  future: futureCategory,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      // If snapshot contains valid data
-                      // display it
-                      return Text(snapshot.data.label);
-                    } else if (snapshot.hasError) {
-                      // If it has errors
-                      // display error
-                      return Text("${snapshot.error}");
-                    }
-
-                    return CircularProgressIndicator(); //By default, show a loading spinner
-                  },
-
-                )
+                child: Row(
+                  children: _drawContainers(categoriesLength),
+                ),
               ),
               Divider(
                 color: Colors.grey,
@@ -220,16 +221,16 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
-                    _drawContainers('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
+                    _drawContainer('circle'),
                   ],
                 ),
               ),
