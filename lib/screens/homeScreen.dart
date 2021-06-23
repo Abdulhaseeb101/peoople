@@ -13,20 +13,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Future<Category> futureCategory;  // Variable to fetch categories
-
-  @override
-  void initState() {
-    super.initState();
-    futureCategory = fetchCategories();
-
-    if (categoriesLength == null) {
-      // Exception handling for when
-      // might turn out to be null
-      throw Exception('Categories Length returned as null');
-    }
-  }
-
   int _selectedIndex = 0; // Index denotes the select menu in bottom nav bar
 
   void _onItemTapped(int index) {
@@ -65,7 +51,7 @@ class _HomeState extends State<Home> {
         color: Colors.blueGrey,
         width: 80.0,
         height: 80.0,
-        margin: EdgeInsets.all(20.0),
+        margin: EdgeInsets.all(10.0),
       );
     }
   }
@@ -137,7 +123,6 @@ class _HomeState extends State<Home> {
                 width: MediaQuery.of(context).size.width * 1,
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Container(
-                  height: 1000.0,
                   child: CarouselSlider(
                     options: CarouselOptions(
                       aspectRatio: 16/9,
@@ -204,7 +189,16 @@ class _HomeState extends State<Home> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: _drawContainers(categoriesLength),
+                  children: <Widget>[
+                    _drawContainer(),
+                    _drawContainer(),
+                    _drawContainer(),
+                    _drawContainer(),
+                    _drawContainer(),
+                    _drawContainer(),
+                    _drawContainer(),
+                    _drawContainer(),
+                  ]
                 ),
               ),
               Divider(
@@ -217,22 +211,42 @@ class _HomeState extends State<Home> {
                     fontSize: 30.0,
                   )
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: <Widget>[
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                    _drawContainer('circle'),
-                  ],
-                ),
+              FutureBuilder(
+                future: fetchCategories(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if(snapshot.data == null) {
+                    return Center(
+                        child: Text('Loading...')
+                    );
+                  } else {
+                    return SizedBox(
+                      height: 120.0,
+                      child: ListView.builder(
+                        itemCount: snapshot.data.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext, int index) {
+                          return Column(
+                            children: <Widget> [
+                              Container(
+                                width: 80.0,
+                                height: 80.0,
+                                margin: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                 shape: BoxShape.circle,
+                                  color: Colors.blueGrey,
+                                ),
+                              ),
+                              Align(
+                                child: Text(snapshot.data[index].label),
+                                alignment: Alignment.center,
+                              ),
+                            ]
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
               ),
             ]),
         bottomNavigationBar: BottomNavigationBar(
