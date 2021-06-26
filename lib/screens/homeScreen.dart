@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:newflut_app/models/category.dart';
 import 'package:newflut_app/services/services.dart';
 
 class Home extends StatefulWidget {
@@ -24,46 +23,33 @@ class _HomeState extends State<Home> {
     );
   }
 
-  List<Widget> _drawContainers(int _count,[String _shape]) {
-    List<Widget> _containers = [];
-    print(_containers);
-    for (int i = 0; i < _count; i++) {
-      _containers.add(_drawContainer(_shape));
-    }
+  List<Widget> _drawContainers() {
+    // This function draws containers for the home page recents
 
-    return _containers;
-  }
-  Widget _drawContainer([String _shape]) {
-    // This function draws containers for the home page
-    if (_shape == 'circle') {
-      // circle container are for the categories
-      return Container(
-        width: 80.0,
-        height: 80.0,
-        margin: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueGrey,
-        ),
-      );
-    } else {
-      return Container(
-        color: Colors.blueGrey,
-        width: 80.0,
-        height: 80.0,
-        margin: EdgeInsets.all(10.0),
+    List<Widget> containers = [];
+    const int recentsCount = 10;  // number of recents
+
+    for(int i = 0; i <= recentsCount; i++) {
+      containers.add(
+          Container(
+            color: Colors.blueGrey,
+            width: 80.0,
+            height: 80.0,
+            margin: EdgeInsets.all(10.0),
+          )
       );
     }
+    return containers;
   }
 
-  final List<String> imgList = [
+  final List<String> imgList = [  // path to images used in the image carousel
     'images/c1.jpg',
     'images/m1.jpeg',
     'images/w1.jpeg',
     'images/w3.jpeg',
   ];
 
-  CarouselController _customCarouselController = CarouselController();
+  CarouselController _customCarouselController = CarouselController();  // controller for the image carousel
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +59,15 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.white,
           elevation: 0,
           title: Image.asset(
-            'Assets/pngfind.com-aai-png-3728789.png',
+            'Assets/pngfind.com-aai-png-3728789.png',   // path to image used as logo placeholder
             fit: BoxFit.cover,
             width: 100,
           ),
           actions: <Widget>[
             Padding(
                 padding: EdgeInsets.fromLTRB(0, 12, 10, 0),
-                child: RichText(
-                    text: TextSpan(
+                child: RichText(    // clickable text that opens a bottomUpModel
+                    text: TextSpan( // to display map
                         text: 'Adirampattinam',
                         recognizer: new TapGestureRecognizer()
                           ..onTap = () {
@@ -189,16 +175,7 @@ class _HomeState extends State<Home> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: <Widget>[
-                    _drawContainer(),
-                    _drawContainer(),
-                    _drawContainer(),
-                    _drawContainer(),
-                    _drawContainer(),
-                    _drawContainer(),
-                    _drawContainer(),
-                    _drawContainer(),
-                  ]
+                  children: _drawContainers(),
                 ),
               ),
               Divider(
@@ -216,7 +193,12 @@ class _HomeState extends State<Home> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if(snapshot.data == null) {
                     return Center(
-                        child: Text('Loading...')
+                        child: Row(
+                          children: <Widget>[
+                            CircularProgressIndicator(),
+                            Text('Loading...'),
+                          ],
+                        ),
                     );
                   } else {
                     return SizedBox(

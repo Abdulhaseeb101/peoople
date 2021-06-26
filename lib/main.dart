@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:newflut_app/Screens/otpScreen.dart';
+import 'package:newflut_app/constants.dart';
+import 'package:newflut_app/helper/sizeConfig.dart';
+import 'package:newflut_app/helper/buildForms.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: SignInPage()));
@@ -13,6 +14,12 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+
+  // Variables to store data acquired from textfields
+  String email;
+  String password;
+  String confirmPassword;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,50 +35,22 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(height: 80),
             Text(
               'Welcome',
-              style: TextStyle(fontSize: 40.0),
+              style: TextStyle(
+                fontSize: getProportionateWidth(context, 0.10),
+                fontWeight: FontWeight.bold,
+                color: PTextColor,
+              ),
             ),
             Text(
-              'Sign in with your Mobile Number',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            SizedBox(height: 70),
-            Row(
-              children: [
-                CountryCodePicker(
-                  onChanged: print,
-                  initialSelection: 'IN',
-                  showFlag: true,
-                  showCountryOnly: true,
-                ),
-                Expanded(
-                    child: TextField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Phone Number',
-                      hintText: 'Enter Phone Number'),
-                ))
-              ],
-            ),
-            SizedBox(
-              height: 200.0,
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints.tightFor(width: 300.0),
-              child: ElevatedButton(
-                child: Text('Continue'),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OtpPage(),
-                      ));
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white10,
-                ),
+              'Sign in with your Email',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: getProportionateWidth(context, 0.05),
+                color: STextColor,
               ),
-            )
+            ),
+            SizedBox(height: getProportionateHeight(context, 0.05),),
+            SizedBox(child:SignUpForm(), width: getProportionateWidth(context, 0.9),),
           ],
         ),
       )),

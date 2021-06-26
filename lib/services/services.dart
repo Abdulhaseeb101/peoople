@@ -20,7 +20,6 @@ Future<List<Category>> fetchCategories() async {
       categories.add(category);
     }
 
-    print(categories.length); // TEST
     return categories;
   } else {
     // If the server did not respond
