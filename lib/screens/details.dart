@@ -109,11 +109,7 @@ class _DetailsPageState extends State<DetailsPage> {
               child: ElevatedButton(
                 child: Text('Continue'),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ));
+                  Navigator.pushNamed(context, '/HomeScreen');
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white10,

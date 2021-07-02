@@ -2,12 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:newflut_app/constants.dart';
 import 'package:newflut_app/helper/sizeConfig.dart';
 import 'package:newflut_app/helper/buildForms.dart';
+import 'package:newflut_app/screens/cart.dart';
+import 'package:newflut_app/screens/favorites.dart';
+import 'package:newflut_app/screens/homeScreen.dart';
+import 'package:newflut_app/screens/notifications.dart';
+import 'package:newflut_app/screens/profile.dart';
 
 void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: SignInPage()));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,
+                      home: SignInPage(),
+                      routes: {
+                        '/HomeScreen': (BuildContext context) => Home(),
+                        '/ProfileScreen': (BuildContext context) => Profile(),
+                        '/Cart': (BuildContext context) => Cart(),
+                        '/Favorites': (BuildContext context) => Favorites(),
+                        '/Notifications': (BuildContext) => Notifications(),
+                      },
+          )
+  );
 }
 
 class SignInPage extends StatefulWidget {
+
 
   @override
   _SignInPageState createState() => _SignInPageState();

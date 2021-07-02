@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:newflut_app/constants.dart';
 import 'package:newflut_app/helper/sizeConfig.dart';
-import 'package:newflut_app/screens/otpScreen.dart';
+import 'package:newflut_app/screens/signUp/signIn.dart';
 
+/* Components of Sign In page */
 class SignUpForm extends StatefulWidget {
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -40,7 +41,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => OtpPage(),
+                        builder: (context) => SignUpSignIn(),
                       ));
                 }
               },
@@ -158,3 +159,41 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 }
+/* Components of Sign In page */
+///////////////////////////////////////////
+/* Components of Sign In/Sign Up page */
+
+TextFormField buildPhoneNumberForm() {
+  String phoneNumber;
+  return TextFormField(
+    keyboardType: TextInputType.number,
+    onSaved: (newValue) => phoneNumber = newValue,
+    onChanged: (value) {
+      phoneNumber = value;
+    },
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Enter Phone Number';
+      }
+      return null;
+    },
+    decoration: InputDecoration(
+      fillColor: bgColor,
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      suffixIcon: Icon(
+        Icons.phone_android,
+      ),
+      labelText: 'Phone Number',
+      hintText: 'Enter your ten digit phone number',
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(BorderRadiusValue),
+        borderSide: BorderSide(
+          color: PColor,
+          width: TextFieldBorderWidth,
+        ),
+      ),
+    ),
+  );
+}
+
+/* Components of Sign In/Sign Up page */
