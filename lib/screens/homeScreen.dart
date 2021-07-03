@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:newflut_app/helper/mainNavigation.dart';
 import 'package:newflut_app/menuOptionEnum.dart';
 import 'package:newflut_app/services/services.dart';
+import 'package:newflut_app/constants.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -75,43 +76,52 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () => _customCarouselController.nextPage(
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.linear,
-                ),
-                child: Text('→'),
-              ),
               Row(
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
+                    margin: EdgeInsets.fromLTRB(20, 20.0, 0, 0),
                     child: TextField(
                         keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                          fillColor: bgColor,
+                          floatingLabelBehavior: FloatingLabelBehavior.always,
+                          suffixIcon: Icon(
+                            Icons.search,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(BorderRadiusValue),
+                            borderSide: BorderSide(
+                              color: PColor,
+                              width: TextFieldBorderWidth,
+                            ),
+                          ),
                           labelText: 'Search',
 
                           hintText: 'How can we help ?',
                         )),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.search,
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                    child: IconButton(
+                      color: STextColor,
+                      icon: Icon(
+                        Icons.search,
+                      ),
+                      onPressed: () {
+                        print('Hello');
+                      },
                     ),
-                    onPressed: () {
-                      print('Hello');
-                    },
                   )
                 ],
               ),
               Divider(
-                color: Colors.grey,
+                color: STextColor,
               ),
               Text(
                 'Recents',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: PTextColor,
                   fontSize: 30.0,
                 )
               ),
@@ -122,12 +132,12 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Divider(
-                color: Colors.grey,
+                color: STextColor,
               ),
               Text(
                   'Categories',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: PTextColor,
                     fontSize: 30.0,
                   )
               ),

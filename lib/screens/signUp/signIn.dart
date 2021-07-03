@@ -12,8 +12,8 @@ class SignUpSignIn extends StatefulWidget {
 }
 
 class _SignUpSignInState extends State<SignUpSignIn> {
-  bool isVisiblePH = true;
-  bool isVisibleG = false;
+  bool isPhSignVisible = true;
+  bool isGSignVisible = true;
 
   Widget _drawButtons(BuildContext context, String text) {
     return TextButton(
@@ -39,12 +39,19 @@ class _SignUpSignInState extends State<SignUpSignIn> {
         )),
       ),
       onPressed: () {
-        print(isVisiblePH);
+        /*print(isVisiblePH);
         print(isVisibleG);
         if (isVisiblePH == true && isVisibleG == false) {
           setState(() {
             isVisiblePH = !isVisiblePH;
             isVisibleG = !isVisibleG;
+          });
+        }*/
+
+        if(text == 'Sign In with Phone Number') {
+          setState(() {
+            isPhSignVisible = false;
+            isGSignVisible = false;
           });
         }
       },
@@ -66,7 +73,7 @@ class _SignUpSignInState extends State<SignUpSignIn> {
             Container(
               child: AnimatedSwitcher(
                   duration: Duration(milliseconds: 1000),
-                  child: isVisiblePH
+                  child: isPhSignVisible
                       ? _drawButtons(context, 'Sign In with Phone Number') : SizedBox(child: buildPhoneNumberForm(), width: getProportionateWidth(context, 0.85),)), // drawing button using a functions call
             ),
             SizedBox(
@@ -78,7 +85,7 @@ class _SignUpSignInState extends State<SignUpSignIn> {
               height: getProportionateHeight(context, 0.07),
               child: AnimatedSwitcher(
                 duration: Duration(milliseconds: 500),
-                child: isVisibleG
+                child: isGSignVisible
                     ? _drawButtons(context, 'Sign In with Google')
                     : TextButton(
                         child: SizedBox(

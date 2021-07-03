@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:newflut_app/constants.dart';
-import 'package:newflut_app/screens/homeScreen.dart';
-import 'package:newflut_app/screens/profile.dart';
 import 'package:newflut_app/menuOptionEnum.dart';
 
 // This file contains the code for the custom bottom
@@ -46,35 +44,56 @@ class MainBottomNavigationBar extends StatelessWidget {
               color: MenuState.profile == selectedMenu
                 ? PTextColor
                 : inActiveIconColor,
-              onPressed: () => Navigator.pushNamed(context, '/ProfileScreen'),
-            ),
-            IconButton(
-              icon: Icon(Icons.home),
-              color: MenuState.home == selectedMenu
-                  ? PTextColor
-                  : inActiveIconColor,
-              onPressed: () => Navigator.pushNamed(context, '/HomeScreen'),
+              onPressed: () {
+                if(selectedMenu != MenuState.profile) {
+                  Navigator.pushNamed(context, '/ProfileScreen');
+                }
+              },
             ),
             IconButton(
               icon: Icon(Icons.shopping_cart),
               color: MenuState.cart == selectedMenu
                   ? PTextColor
                   : inActiveIconColor,
-              onPressed: () => Navigator.pushNamed(context, '/Cart'),
+              onPressed: () {
+                if(selectedMenu != MenuState.cart) {
+                  Navigator.pushNamed(context, '/Cart');
+                }
+              },
+            ),
+            IconButton(
+              iconSize: 20.0,
+              icon: Icon(Icons.home),
+              color: MenuState.home == selectedMenu
+                  ? PTextColor
+                  : inActiveIconColor,
+              onPressed: () {
+                if(selectedMenu != MenuState.home) {
+                  Navigator.pushNamed(context, '/HomeScreen');
+                }
+              },
             ),
             IconButton(
               icon: Icon(Icons.assistant),
               color: MenuState.favorites == selectedMenu
                   ? PTextColor
                   : inActiveIconColor,
-              onPressed: () => Navigator.pushNamed(context, '/Favorites'),
+              onPressed: () {
+                if(selectedMenu != MenuState.favorites) {
+                  Navigator.pushNamed(context, '/Favorites');
+                }
+              },
             ),
             IconButton(
               icon: Icon(Icons.notifications),
               color: MenuState.notification == selectedMenu
                   ? PTextColor
                   : inActiveIconColor,
-              onPressed: () => Navigator.pushNamed(context, '/Notifications'),
+              onPressed: () {
+                if(selectedMenu != MenuState.notification) {
+                  Navigator.pushNamed(context, '/Notifications');
+                }
+              },
             )
           ],
         ),

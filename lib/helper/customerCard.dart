@@ -77,14 +77,13 @@ class _CustomerCardState extends State<CustomerCard> {
                           ),
                         ),
                       ),
-                      Center(
-                        child: Positioned(
+                      Positioned(
                           top: 100,
+                          left: 90,
                           child: Text(
                             custData.custId,
                             style: TextStyle(color: STextColor, fontSize: 18.0),
                           ),
-                        ),
                       ),
                       Positioned(
                         top: 150,
@@ -134,7 +133,7 @@ class _CustomerCardState extends State<CustomerCard> {
                     children: [
                       Positioned(
                         top: 20,
-                        left: 20,
+                        right: 20,
                         child: Text(custData.custName,
                             style: TextStyle(
                                 color: STextColor,
@@ -142,30 +141,50 @@ class _CustomerCardState extends State<CustomerCard> {
                                 fontWeight: FontWeight.w900)),
                       ),
                       Positioned(
-                        top: 60,
-                        left: 20,
+                        top: 120,
+                        right: 20,
                         child: Container(
-                          width: getProportionateWidth(context, 0.7),
+                          width: getProportionateWidth(context, 0.6),
                           child: Text(
                             custData.custAddrs,
-                            style: TextStyle(color: PTextColor, fontSize: 18.0),
+                            style: TextStyle(color: PTextColor, fontSize: 14.0),
                           ),
                         ),
                       ),
                       Positioned(
                         child: Text(
                           custData.custEmail,
-                          style: TextStyle(color: PTextColor, fontSize: 18.0),
+                          style: TextStyle(color: PTextColor, fontSize: 14.0),
                         ),
-                        top: 120,
-                        left: 20,
+                        top: 150,
+                        right: 20,
                       ),
                       Positioned(
-                        top: 160,
-                        left: 20,
+                        top: 180,
+                        right: 20,
                         child: Text(
                           custData.custPhone,
-                          style: TextStyle(color: PTextColor, fontSize: 18.0),
+                          style: TextStyle(color: PTextColor, fontSize: 14.0),
+                        ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        left: 20,
+                        child: Container(
+                          height: getProportionateHeight(context, 0.03),
+                          child: Image(
+                            image: AssetImage('Assets/pngfind.com-aai-png-3728789.png'),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 30,
+                        right: 30,
+                        child: Container(
+                          height: getProportionateHeight(context, 0.03),
+                          child: Image(
+                            image: AssetImage('Assets/qrCode.png'),
+                          ),
                         ),
                       ),
                     ],
