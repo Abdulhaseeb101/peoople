@@ -7,6 +7,8 @@ import 'package:newflut_app/screens/favorites.dart';
 import 'package:newflut_app/screens/homeScreen.dart';
 import 'package:newflut_app/screens/notifications.dart';
 import 'package:newflut_app/screens/profile.dart';
+import 'package:newflut_app/screens/selectedCategory.dart';
+import 'package:newflut_app/screens/selectedShop.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false,
@@ -16,9 +18,11 @@ void main() {
                         '/ProfileScreen': (BuildContext context) => Profile(),
                         '/Cart': (BuildContext context) => Cart(),
                         '/Favorites': (BuildContext context) => Favorites(),
-                        '/Notifications': (BuildContext) => Notifications(),
+                        '/Notifications': (BuildContext context) => Notifications(),
+                        '/SelectedCategory': (BuildContext context) => SelectedCategory(),
+                        '/SelectedShop': (BuildContext context) => SelectedShop(),
                       },
-          )
+          ),
   );
 }
 

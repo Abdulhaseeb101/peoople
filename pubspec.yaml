@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.3
   flutter_svg: ^0.22.0
   flip_card: ^0.5.0
+  numberpicker: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -53,7 +54,6 @@ flutter:
   assets:
      - Assets/Profile Image.png
      - Assets/icons/
-     - Assets/qrCode.svg
      - Assets/pngfind.com-aai-png-3728789.png
      - images/
   #   - images/a_dot_ham.jpeg

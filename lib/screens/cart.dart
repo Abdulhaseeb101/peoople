@@ -12,20 +12,25 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          color: Colors.lightBlue,
-          child: Text(
-            'Cart Screen',
-            style: TextStyle(
-              color: Colors.white
+    return WillPopScope(
+      onWillPop: () async {
+        return Navigator.canPop(context);
+      },
+      child: Scaffold(
+        body: Center(
+          child: Container(
+            color: Colors.lightBlue,
+            child: Text(
+              'Cart Screen',
+              style: TextStyle(
+                color: Colors.white
+              ),
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: MainBottomNavigationBar(
-        selectedMenu: MenuState.cart,
+        bottomNavigationBar: MainBottomNavigationBar(
+          selectedMenu: MenuState.cart,
+        ),
       ),
     );
   }

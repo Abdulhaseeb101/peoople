@@ -1,36 +1,63 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:newflut_app/constants.dart';
 import 'package:newflut_app/models/category.dart';
 import 'package:newflut_app/models/customerInfo.dart';
+import 'dart:developer';
 
-int categoriesLength; //length of the JSON response
+Future<List<Category>> fetchCategories(String uri) async {
+  try {
+    final response = await http.get(Uri.parse(uri));
 
-Future<List<Category>> fetchCategories() async {
-  final response = await http.get(Uri.parse('https://9ed8e8be-5dbc-47d8-a7c6-7c0eebe4df4c.mock.pstmn.io/get_category'));
+    if (response.statusCode == 200) {
+      // If the server did respond
+      // then parse JSON
+      final jsonResponse = jsonDecode(response.body);
 
-  if (response.statusCode == 200) {
-    // If the server did respond
-    // then parse JSON
-    final jsonResponse = jsonDecode(response.body);
+      List<Category> categories = [];
 
-    List<Category> categories = [];
+      for (var cat in jsonResponse) {
+        Category category = Category(cat['label'], cat['value']);
+        categories.add(category);
+      }
 
-    for (var cat in jsonResponse) {
-      Category category = Category(cat['label'], cat['value']);
-
-      categories.add(category);
+      return categories;
+    } else {
+      // If the server did not respond
+      // then throw an exception
+      throw Exception('Failed to fetch categories');
     }
-
+  }
+  on SocketException {
+    List<Category> categories = [];
     return categories;
-  } else {
-    // If the server did not respond
-    // then throw an exception
-    throw Exception('Failed to fetch categories');
+  }
+}
+
+Future<Map> fetchProductsByCategory(String uri) async {
+  try {
+    final response = await http.get(Uri.parse(uri));  // get response from the url
+
+    if (response.statusCode == 200) {
+      // If the server did respond
+      // then parse JSON
+      final Map jsonResponse = jsonDecode(response.body);
+      return jsonResponse;
+    } else {
+      // If the server did not respond
+      // then throw an exception
+      throw Exception('Failed to fetch categories');
+    }
+  }
+  on SocketException {
+    Map jsonResponse = {};
+    return jsonResponse;
   }
 }
 
 Future<CustomerInfo> fetchCustomerInfo() async {
-  final response = await http.get(Uri.parse('https://9ed8e8be-5dbc-47d8-a7c6-7c0eebe4df4c.mock.pstmn.io/get_custinfo'));
+  final response = await http.get(Uri.parse('$SERVER_URL/get_custinfo'));
 
   if (response.statusCode == 200) {
     // If the server did respond the

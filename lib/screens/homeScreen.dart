@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:newflut_app/helper/buildCategories.dart';
 import 'package:newflut_app/helper/mainNavigation.dart';
 import 'package:newflut_app/menuOptionEnum.dart';
 import 'package:newflut_app/services/services.dart';
@@ -22,11 +23,14 @@ class _HomeState extends State<Home> {
 
     for(int i = 0; i <= recentsCount; i++) {
       containers.add(
-          Container(
-            color: Colors.blueGrey,
-            width: 80.0,
-            height: 80.0,
-            margin: EdgeInsets.all(10.0),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              color: Colors.blueGrey,
+              width: 80.0,
+              height: 80.0,
+              margin: EdgeInsets.all(10.0),
+            ),
           )
       );
     }
@@ -52,8 +56,7 @@ class _HomeState extends State<Home> {
               Container(
                 width: MediaQuery.of(context).size.width * 1,
                 height: MediaQuery.of(context).size.height * 0.2,
-                child: Container(
-                  child: CarouselSlider(
+                  child:CarouselSlider(
                     options: CarouselOptions(
                       aspectRatio: 16/9,
                       initialPage: 0,
@@ -68,13 +71,12 @@ class _HomeState extends State<Home> {
                                 child: Center(
                               child: Image.asset(
                                 item,
-                                fit: BoxFit.cover,
+                                scale: 0.10,
                               ),
                             )))
                         .toList(),
                     carouselController: _customCarouselController,
                   ),
-                ),
               ),
               Row(
                 children: [
@@ -142,7 +144,7 @@ class _HomeState extends State<Home> {
                   )
               ),
               FutureBuilder(
-                future: fetchCategories(),
+                future: fetchCategories('$SERVER_URL/get_category'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if(snapshot.data == null) {
                     return Center(
@@ -154,32 +156,13 @@ class _HomeState extends State<Home> {
                         ),
                     );
                   } else {
-                    return SizedBox(
-                      height: 120.0,
-                      child: ListView.builder(
-                        itemCount: snapshot.data.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext, int index) {
-                          return Column(
-                            children: <Widget> [
-                              Container(
-                                width: 80.0,
-                                height: 80.0,
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                 shape: BoxShape.circle,
-                                  color: Colors.blueGrey,
-                                ),
-                              ),
-                              Align(
-                                child: Text(snapshot.data[index].label),
-                                alignment: Alignment.center,
-                              ),
-                            ]
-                          );
-                        },
-                      ),
-                    );
+                    if (snapshot.data.length == 0) {
+                      return Text(
+                        'Check your network',
+                      );
+                    } else {
+                      return buildCategories(snapshot, '/SelectedCategory', context);
+                    }
                   }
                 },
               ),

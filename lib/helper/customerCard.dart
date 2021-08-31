@@ -177,16 +177,6 @@ class _CustomerCardState extends State<CustomerCard> {
                           ),
                         ),
                       ),
-                      Positioned(
-                        bottom: 30,
-                        right: 30,
-                        child: Container(
-                          height: getProportionateHeight(context, 0.03),
-                          child: Image(
-                            image: AssetImage('Assets/qrCode.png'),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 )
