@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:newflut_app/constants.dart';
 import 'package:newflut_app/helper/buildForms.dart';
 import 'package:newflut_app/helper/sizeConfig.dart';
-import 'package:newflut_app/screens/details.dart';
+import 'package:newflut_app/screens/otpScreen.dart';
 
 class SignUpSignIn extends StatefulWidget {
   @override
@@ -115,7 +115,7 @@ class _SignUpSignInState extends State<SignUpSignIn> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailsPage(),
+                                builder: (context) => OtpPage(),
                               ));
                         },
                       ),

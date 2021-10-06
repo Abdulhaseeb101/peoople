@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newflut_app/screens/details.dart';
 import 'package:pin_entry_text_field/pin_entry_text_field.dart';
-import 'package:newflut_app/Screens/details.dart';
-
 class OtpPage extends StatefulWidget {
   const OtpPage({Key key}) : super(key: key);
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/painting.dart';
 import 'package:newflut_app/helper/mainNavigation.dart';
 import 'package:newflut_app/menuOptionEnum.dart';
+import 'package:newflut_app/screens/appoinmentsMain.dart';
 import 'package:newflut_app/services/services.dart';
 import 'package:newflut_app/constants.dart';
 
@@ -23,14 +25,87 @@ class _HomeState extends State<Home> {
     for(int i = 0; i <= recentsCount; i++) {
       containers.add(
           Container(
-            color: Colors.blueGrey,
             width: 80.0,
             height: 80.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.blueGrey
+            ),
             margin: EdgeInsets.all(10.0),
           )
       );
     }
     return containers;
+  }
+
+  List<Widget> _drawCategories() {
+    return [
+      Column(
+        children: [
+          Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blueGrey
+            ),
+            margin: EdgeInsets.all(10.0),
+          ),
+          Text("Shop"),
+        ],
+      ),
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AppointsmentsMain(),
+              ));
+        },
+        child: Column(
+          children: [
+            Container(
+              width: 80.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blueGrey
+              ),
+              margin: EdgeInsets.all(10.0),
+            ),
+            Text("Appointment"),
+          ],
+        ),
+      ),
+      Column(
+        children: [
+          Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blueGrey
+            ),
+            margin: EdgeInsets.all(10.0),
+          ),
+          Text("Consultation"),
+        ],
+      ),
+      Column(
+        children: [
+          Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                color: Colors.blueGrey
+            ),
+            margin: EdgeInsets.all(10.0),
+          ),
+          Text("Labour"),
+        ],
+      )
+    ];
   }
 
   final List<String> imgList = [  // path to images used in the image carousel
@@ -156,28 +231,9 @@ class _HomeState extends State<Home> {
                   } else {
                     return SizedBox(
                       height: 120.0,
-                      child: ListView.builder(
-                        itemCount: snapshot.data.length,
+                      child: ListView(
+                        children: _drawCategories(),
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext, int index) {
-                          return Column(
-                            children: <Widget> [
-                              Container(
-                                width: 80.0,
-                                height: 80.0,
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                 shape: BoxShape.circle,
-                                  color: Colors.blueGrey,
-                                ),
-                              ),
-                              Align(
-                                child: Text(snapshot.data[index].label),
-                                alignment: Alignment.center,
-                              ),
-                            ]
-                          );
-                        },
                       ),
                     );
                   }

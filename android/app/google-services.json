@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1076437662203",
+    "project_id": "peoople-5d8bb",
+    "storage_bucket": "peoople-5d8bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076437662203:android:d6e3dbd269eb82b9a5335e",
+        "android_client_info": {
+          "package_name": "com.my.newflut_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076437662203-o96ftbdjsh7muqj30cbc17c3lm60sit0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAyOHAKMFiKTD1oq9j0YFKDlBLrxezv3s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076437662203-o96ftbdjsh7muqj30cbc17c3lm60sit0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

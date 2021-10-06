@@ -6,7 +6,8 @@ import 'package:newflut_app/models/customerInfo.dart';
 int categoriesLength; //length of the JSON response
 
 Future<List<Category>> fetchCategories() async {
-  final response = await http.get(Uri.parse('https://9ed8e8be-5dbc-47d8-a7c6-7c0eebe4df4c.mock.pstmn.io/get_category'));
+  final response = await http
+      .get(Uri.parse('https://peopplemockerserver.herokuapp.com/get_category'));
 
   if (response.statusCode == 200) {
     // If the server did respond
@@ -30,7 +31,8 @@ Future<List<Category>> fetchCategories() async {
 }
 
 Future<CustomerInfo> fetchCustomerInfo() async {
-  final response = await http.get(Uri.parse('https://9ed8e8be-5dbc-47d8-a7c6-7c0eebe4df4c.mock.pstmn.io/get_custinfo'));
+  final response = await http
+      .get(Uri.parse('https://peopplemockerserver.herokuapp.com/get_category'));
 
   if (response.statusCode == 200) {
     // If the server did respond the
