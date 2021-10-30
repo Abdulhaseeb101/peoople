@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/painting.dart';
 import 'package:newflut_app/helper/mainNavigation.dart';
 import 'package:newflut_app/menuOptionEnum.dart';
-import 'package:newflut_app/screens/appoinmentsMain.dart';
+import 'package:newflut_app/screens/appointmentsMain.dart';
 import 'package:newflut_app/services/services.dart';
 import 'package:newflut_app/constants.dart';
 
@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AppointsmentsMain(),
+                builder: (context) => AppointmentsMain(),
               ));
         },
         child: Column(

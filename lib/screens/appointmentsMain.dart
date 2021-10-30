@@ -2,15 +2,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:newflut_app/constants.dart';
 import 'package:newflut_app/helper/sizeConfig.dart';
+import 'package:newflut_app/screens/appointmentsSub.dart';
 
-class AppointsmentsMain extends StatefulWidget {
-  const AppointsmentsMain({Key key}) : super(key: key);
+class AppointmentsMain extends StatefulWidget {
+  const AppointmentsMain({Key key}) : super(key: key);
 
   @override
-  _AppointsmentsMainState createState() => _AppointsmentsMainState();
+  _AppointmentsMainState createState() => _AppointmentsMainState();
 }
 
-class _AppointsmentsMainState extends State<AppointsmentsMain> {
+class _AppointmentsMainState extends State<AppointmentsMain> {
 
   final List<String> imgList = [  // path to images used in the image carousel
     'images/c1.jpg',
@@ -21,26 +22,35 @@ class _AppointsmentsMainState extends State<AppointsmentsMain> {
 
   List<Widget> _drawAppointmentCategories() {
     return [
-      Column(
-        children: [
-          Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blueGrey
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AppointmentsSub("https://peopplemockerserver.herokuapp.com/get_appoint_sub_cat"),
+              ));
+        },
+        child: Column(
+          children: [
+            Container(
+              width: 80.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blueGrey
+              ),
+              margin: EdgeInsets.all(10.0),
             ),
-            margin: EdgeInsets.all(10.0),
-          ),
-          Text("Doctor"),
-        ],
+            Text("Doctor"),
+          ],
+        ),
       ),
       GestureDetector(
         onTap: () {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AppointsmentsMain(),
+                builder: (context) => AppointmentsSub("https://peopplemockerserver.herokuapp.com/get_appoint_sub_cat"),
               ));
         },
         child: Column(
@@ -58,33 +68,37 @@ class _AppointsmentsMainState extends State<AppointsmentsMain> {
           ],
         ),
       ),
-      Column(
-        children: [
-          Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blueGrey
+      GestureDetector(
+        child: Column(
+          children: [
+            Container(
+              width: 80.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blueGrey
+              ),
+              margin: EdgeInsets.all(10.0),
             ),
-            margin: EdgeInsets.all(10.0),
-          ),
-          Text("Architect"),
-        ],
+            Text("Architect"),
+          ],
+        ),
       ),
-      Column(
-        children: [
-          Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.blueGrey
+      GestureDetector(
+        child: Column(
+          children: [
+            Container(
+              width: 80.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.blueGrey
+              ),
+              margin: EdgeInsets.all(10.0),
             ),
-            margin: EdgeInsets.all(10.0),
-          ),
-          Text("Labs"),
-        ],
+            Text("Labs"),
+          ],
+        ),
       )
     ];
   }
@@ -185,7 +199,6 @@ class _AppointsmentsMainState extends State<AppointsmentsMain> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
-                  
                   children: [
                     Container(
                       width: getProportionateWidth(context, 0.9),
