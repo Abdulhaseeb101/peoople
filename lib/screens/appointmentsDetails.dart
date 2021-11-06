@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import "package:flutter/material.dart";
 import 'package:newflut_app/constants.dart';
 import 'package:newflut_app/helper/sizeConfig.dart';
+import 'package:newflut_app/screens/appointmentsSchedule.dart';
 import 'package:newflut_app/services/services.dart';
 
 class AppointmentsDetails extends StatefulWidget {
@@ -113,39 +114,48 @@ class _AppointmentsDetailsState extends State<AppointmentsDetails> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                              child: Row(
-                            children: [
-                              SizedBox(width: getProportionateWidth(context, 0.01),),
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                          '$index',
-                                        style: TextStyle(
-                                          fontSize: 20.0
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AppointmentsSchedule(),
+                                  ));
+                            },
+                            child: Container(
+                                child: Row(
+                              children: [
+                                SizedBox(width: getProportionateWidth(context, 0.01),),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                            '$index',
+                                          style: TextStyle(
+                                            fontSize: 20.0
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                          snapshot.data[index].name,
-                                        style: TextStyle(
-                                          fontSize: 18.0
-                                        )
-                                      ),
-                                      SizedBox(height: getProportionateHeight(context, 0.05))
-                                    ],
+                                        Text(
+                                            snapshot.data[index].name,
+                                          style: TextStyle(
+                                            fontSize: 18.0
+                                          )
+                                        ),
+                                        SizedBox(height: getProportionateHeight(context, 0.05))
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Placeholder(
-                                  fallbackHeight: getProportionateHeight(context, 0.1),
-                                  fallbackWidth: getProportionateWidth(context, 0.2),
-                                ),
-                              SizedBox(width: getProportionateWidth(context, 0.01),)
-                            ],
-                          )
+                                Placeholder(
+                                    fallbackHeight: getProportionateHeight(context, 0.1),
+                                    fallbackWidth: getProportionateWidth(context, 0.2),
+                                  ),
+                                SizedBox(width: getProportionateWidth(context, 0.01),)
+                              ],
+                            )
+                            ),
                           );
                         },
                       ),
